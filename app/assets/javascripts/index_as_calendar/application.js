@@ -12,8 +12,9 @@
 //
 //= require_tree .
 //= require moment
-//= require moment/es.js
+//= require moment/it.js
 //= require fullcalendar
+//= require fullcalendar/locale-all
 
 $(function () {
     

@@ -4,13 +4,15 @@
 	$(function(){
     // Default options for fullCalendar goes here
     default_options = {
-      lang: 'es',
+      locale: 'it',
+      lang: 'it',
       header: {
-        left: 'title',
-        center: '',
-        right: 'prev,today,next month,basicWeek,basicDay'
+        left: 'basicDay,basicWeek,month',
+        center: 'title',
+        right: 'prev,today,next'
       },
       eventRender: function( event, element, view ){
+        element.html(element.html() + event.description)
         element.qtip({
           content: event.tooltip,
           style: {
