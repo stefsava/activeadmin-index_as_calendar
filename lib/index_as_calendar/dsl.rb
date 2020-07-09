@@ -35,11 +35,17 @@ module IndexAsCalendar
         end
       end
 
+      set_default_date = lambda do |params|
+        default_date = params[:initial_date]
+        (options[:fullCalendarOptions]||= {})[:defaultDate] = default_date
+      end
+
       # Setup AJAX
       if options[:ajax]
 
         # Setup fullCalendar to use AJAX calls to retrieve event data
         index as: :calendar, default: options[:default] do |context|
+          set_default_date.call(params)
           context[:fullCalendarOptions] = options[:fullCalendarOptions]
           events = {
             url: "#{collection_path()}/index_as_events.json",
@@ -65,6 +71,7 @@ module IndexAsCalendar
       # Return events to be used during partial render
       else
         index as: :calendar, default: options[:default] do |context|
+          set_default_date.call(params)
           context[:fullCalendarOptions] = options[:fullCalendarOptions]
           events = self.controller.event_mapping(context[:collection], options)
         end
